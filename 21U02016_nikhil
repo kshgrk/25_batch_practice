@@ -1,0 +1,76 @@
+#include<stdio.h>
+#include<cs50.h>
+#include<string.h>
+#include<ctype.h>
+
+int main(int argc,string argv[])
+{
+    if(argc!=2)
+    {
+        printf("you didn't give commabd line argument\n");
+        return 1;
+    }
+    if(strlen(argv[1])!=26)
+    {
+        printf("invalid key length\n");
+        return 1;
+    }
+    for(int i=0;i<26;i++)
+    {
+        //int dum[26];
+        //dum[i]=argv[1][i];
+        for(int j=0;j<26;j++)
+        {
+            if(i==j)
+            {
+                break;
+            }
+            if(argv[1][i]==argv[1][j])
+            {
+                printf("duplicate characters\n");
+                return 1;
+            }
+        }
+        //if(dum[i]<1||dum[i]>127)
+        //{
+          //  printf("invalid characters found\n");
+            //return 1;
+        //}
+
+        if(isalpha(argv[1][i]))
+        {
+           // printf("invalid characters found\n");
+           // return 1;
+        }
+        else
+        {
+            printf("invalid chsaracters found\n");
+            return 1;
+        }
+    }
+    int a[100];
+    string s=get_string("plaintext:  ");
+    printf("ciphertext: ");
+
+    for(int i=0,n=strlen(s);i<n;i++)
+    {
+        a[i]=s[i];
+        for(int j=0;j<26;j++)
+        {
+            if(a[i]==j+97)
+            {
+                s[i]=tolower(argv[1][j]);
+
+            }
+            else if(a[i]==j+65)
+            {
+                s[i]=toupper(argv[1][j]);
+            }
+
+        }
+        printf("%c",s[i]);
+    }
+    printf("\n");
+    return 0;
+}
+
